@@ -1,13 +1,13 @@
 package grafos;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
-
 import uteis.Util;
 import vertices.Vertice;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
 
 public abstract class GrafoMutavel extends Grafo {
     
@@ -28,6 +28,7 @@ public abstract class GrafoMutavel extends Grafo {
      * A função principal do método é que atraves de uma matriz de adjacência é obtido os dados referente
      *  ao grafo assim, carregando suas informações para a classe.
      */
+    @Deprecated
     public boolean carregarGrafo(String path){
 
         File arquivo = new File(path);
@@ -85,6 +86,34 @@ public abstract class GrafoMutavel extends Grafo {
 
     } 
 
+    public void carregarJSON(String path) throws FileNotFoundException{
+
+        HashMap<String, String> hash = new HashMap<>();
+
+        File file = new File(path);
+
+        if(file != null){
+
+            Scanner scanner = new Scanner(file);
+
+            while (scanner.hasNext()){
+
+                String linha = scanner.nextLine();
+
+                String[] valores = linha.split(":");
+
+                if(valores.length == 2){
+
+                    String key = valores[0].replaceAll("\"", "").replaceAll(" ", "");
+                    System.out.print(key + ": ");
+                    String value = valores[1].replaceAll("\"", "").replaceAll(" ", "");
+                    System.out.println(value);
+
+                }
+            }
+        }
+
+    }
 
     /**
      * @param novo -> recebe o vértice a ser adicionado

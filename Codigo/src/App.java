@@ -1,13 +1,16 @@
+import java.io.FileNotFoundException;
+import grafos.GrafoNaoPonderado;
+
 //import grafos.GrafoNaoPonderado;
 
 public class App {
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         
-        /*GrafoNaoPonderado grafo = new GrafoNaoPonderado();
-        grafo.carregarGrafo("C:\\Users\\Pablo Magalhães\\Documents\\GitHub\\projeto2-grupo-4\\codigo\\resources\\grafo1.txt");
-        grafo.imprimiGrafo();*/
+        GrafoNaoPonderado gnp = new GrafoNaoPonderado();
 
+        gnp.carregarJSON("Codigo\\resources\\grafoJson.json");
+        
     }
     
 }
