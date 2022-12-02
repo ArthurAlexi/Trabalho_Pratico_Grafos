@@ -9,12 +9,19 @@ public class Vertice {
 
     private int id = Util.retornaID();
     private List<Aresta> arestas;
+    
     private boolean visitado;
     private int tempoDescobrimento;
     private int tempoTermino;
     private int pai;
 
+    private String name;
+    private double latitude;
+    private double longitude;
+
     /* Construtor */
+
+    
 
     private void init(boolean visitado){
 
@@ -29,6 +36,13 @@ public class Vertice {
 
     }
 
+    public Vertice(String name, double latitude, double longitude){
+        init(false);
+        this.name = name;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     /* Métodos */
 
 
@@ -39,6 +53,33 @@ public class Vertice {
     public boolean addAresta(int destino){
 
         Aresta arestaAdd = new Aresta(destino);
+
+        if(!Util.IsListaArestasVazia(this.arestas)){
+
+            if(existeAresta(destino) == null){
+                
+                addAresta(arestaAdd);
+                return true;
+
+            }else{
+
+                Util.ImprimiErro("Já existe uma aresta nesse destino");
+                return false;
+
+            }
+
+        }else{
+            
+            addAresta(arestaAdd);
+            return true;
+        
+        }
+        
+    }
+
+    public boolean addArestaComPeso(int destino, double peso){
+
+        Aresta arestaAdd = new Aresta(destino,peso);
 
         if(!Util.IsListaArestasVazia(this.arestas)){
 
@@ -232,6 +273,20 @@ public class Vertice {
 
         this.arestas = novas_arestas;
 
+    }
+
+    /* Getters and Setters */
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public double getLatitude() {
+        return this.latitude;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
 }

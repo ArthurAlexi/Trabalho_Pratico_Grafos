@@ -5,9 +5,9 @@ public class Aresta{
 
     private int destino;
     private boolean visitada;
-    private int peso;
+    private double peso;
 
-    private void init(int destino, boolean visitada, int peso){
+    private void init(int destino, boolean visitada, double peso){
 
         this.destino = destino;
         this.visitada = visitada;
@@ -23,11 +23,15 @@ public class Aresta{
         init(destino, false, peso);
     }
 
+    public Aresta(int destino, double peso){
+        init(destino, false, peso);
+    }
+
     public int getDestino(){
         return this.destino;
     }
 
-    public int getPeso(){
+    public double getPeso(){
         return this.peso;
     }
 

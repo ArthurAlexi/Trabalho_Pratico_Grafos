@@ -1,6 +1,6 @@
 package grafos;
 
-import arestas.Aresta;
+
 import uteis.Util;
 import vertices.Vertice;
 
