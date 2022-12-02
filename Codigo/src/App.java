@@ -10,6 +10,8 @@ public class App {
         GrafoNaoPonderado gnp = new GrafoNaoPonderado();
 
         gnp.carregarJSON("Codigo\\resources\\grafoJson.json");
+
+        gnp.imprimiGrafoNaoPonderado();
         
     }
     

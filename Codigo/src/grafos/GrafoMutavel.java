@@ -1,5 +1,6 @@
 package grafos;
 
+import arestas.Aresta;
 import uteis.Util;
 import vertices.Vertice;
 
@@ -108,6 +109,31 @@ public abstract class GrafoMutavel extends Grafo {
                     System.out.print(key + ": ");
                     String value = valores[1].replaceAll("\"", "").replaceAll(" ", "");
                     System.out.println(value);
+
+                    if(key.equals("Vertices")){
+
+                        String[] values = value.split(",");
+
+                        for(int i = 0; i < values.length - 1; i++){
+                            this.addVertice(new Vertice());
+                        }
+
+                    }
+
+                    if(key.equals("Arestas")){
+
+                        String[] values = value.split(",");
+
+                        for(int i = 0; i < values.length; i++){
+
+                            String origem = values[i].split("-")[0];
+                            String destino = values[i].split("-")[1];
+
+                            vertices.get(Integer.parseInt(origem)).addAresta(Integer.parseInt(destino));
+
+                        }
+
+                    }
 
                 }
             }
