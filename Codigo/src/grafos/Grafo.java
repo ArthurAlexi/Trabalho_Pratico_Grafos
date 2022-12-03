@@ -452,5 +452,29 @@ public abstract class Grafo {
         caminho.add(b);
         return caminho;
     }
+
+    public List<Vertice> subtrairGrafo(Vertice verticeRecebido){
+        for (Vertice vertice : this.vertices) {
+            if(vertice.getID() == verticeRecebido.getID()){
+                this.vertices.remove(vertice);
+                return this.vertices;
+            }
+        }
+        return null;
+    }
+
+    public List<Vertice> subtrairGrafo(Aresta arestaRecebida){
+        for (Vertice vertices : this.vertices) {
+            for(Aresta aresta : vertices.getArestas()){
+                if(aresta == arestaRecebida){
+                    this.vertices.remove(aresta);
+                    return this.vertices;
+                }
+            }
+        }
+        return null;
+    }
+
+
 }
 
