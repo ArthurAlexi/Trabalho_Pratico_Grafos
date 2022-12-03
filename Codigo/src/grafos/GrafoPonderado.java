@@ -3,6 +3,8 @@ package grafos;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -56,20 +58,27 @@ public class GrafoPonderado extends GrafoMutavel {
     public double calcularDistancias(Vertice v1, Vertice v2) {
 
         final int RAIO = 6371;
-
+        DecimalFormat df = new DecimalFormat("0.00");
+        df.setRoundingMode(RoundingMode.HALF_UP);
+        
         // Conversão de graus pra radianos das latitudes
         double firstLatToRad = Math.toRadians(v1.getLatitude());
-        double secondLatToRad = Math.toRadians(v2.getLongitude());
+        double firstLongToRad = Math.toRadians(v1.getLongitude());
 
-        // Diferença das longitudes
-        double deltaLongitudeInRad = Math.toRadians(v2.getLongitude() - v1.getLongitude());
+        double secondLatToRad = Math.toRadians(v2.getLatitude());
+        double secondLongToRad = Math.toRadians(v2.getLongitude());
 
-        // Cálcula da distância entre os pontos
-        return Math.acos(Math.cos(firstLatToRad) * Math.cos(secondLatToRad)
-                * Math.cos(deltaLongitudeInRad)
-                + Math.sin(firstLatToRad)
-                        * Math.sin(secondLatToRad))
-                * RAIO;
+        // Haversine formula
+        double dlon = secondLongToRad - firstLongToRad;
+        double dlat = secondLatToRad - firstLatToRad;
+
+        double a = Math.pow(Math.sin(dlat / 2), 2) +
+                   Math.cos(firstLatToRad) * Math.cos(secondLatToRad) *
+                   Math.pow(Math.sin(dlon / 2),2);
+
+        double c = 2 * Math.asin(Math.sqrt(a));
+
+        return   Math.round(c * RAIO  * 100.0)/100.0;
     }
 
     @Override
@@ -87,12 +96,9 @@ public class GrafoPonderado extends GrafoMutavel {
             while (scanner.hasNext()) {
 
                 linha = scanner.nextLine();
-                // if(linha != "]"){
-                // System.out.println("1 linha --->"+linha);
-                // }
 
                 if ((linha.contains("{"))) {
-                    // System.out.println("Chave Aberta");
+                
                 } else if (linha.contains("},") || linha.contains("}")) {
                     Vertice novoVertice = new Vertice(dadosTratados[0], Double.parseDouble(dadosTratados[1]),
                             Double.parseDouble(dadosTratados[2]));

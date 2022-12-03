@@ -23,6 +23,7 @@ public class TesteGrafoPonderado {
         saoPaulo = new Vertice("São Paulo", -23.5504, -46.6339);
         rioDeJaneiro = new Vertice("Rio de Janeiro", -22.9083, -43.1964);
 
-        assertEquals(357.37, gp.calcularDistancias(saoPaulo, rioDeJaneiro));
+        assertEquals(358.42, gp.calcularDistancias(saoPaulo, rioDeJaneiro));
+        //Valor aproximado
     }
 }
