@@ -1,6 +1,7 @@
 package grafos;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import arestas.Aresta;
@@ -453,6 +454,11 @@ public abstract class Grafo {
         return caminho;
     }
 
+    /**
+     *
+     * @param verticeRecebido -> recebe um vertice
+     * @return -> retorna uma lista de vertices sem o vértice removido
+     */
     public List<Vertice> subtrairGrafo(Vertice verticeRecebido){
         for (Vertice vertice : this.vertices) {
             if(vertice.getID() == verticeRecebido.getID()){
@@ -463,6 +469,11 @@ public abstract class Grafo {
         return null;
     }
 
+    /**
+     *
+     * @param arestaRecebida -> recebe uma aresta
+     * @return -> retorna uma lista de vertices sem a aresta removido
+     */
     public List<Vertice> subtrairGrafo(Aresta arestaRecebida){
         for (Vertice vertices : this.vertices) {
             for(Aresta aresta : vertices.getArestas()){
@@ -474,6 +485,24 @@ public abstract class Grafo {
         }
         return null;
     }
+
+    /**
+     *
+     * @param verticeRecebido -> recebe um vertice
+     * @return -> retorna o grau do vertice recebido, e uma lista de seus vertices vizinhos
+     */
+    public List[] calculaGrauVizinhos(Vertice verticeRecebido) {
+        double grau = this.vertices.get(verticeRecebido.getID()).getGrau();
+        List<Vertice> vizinhos = new ArrayList<Vertice>();
+
+        for (Aresta aresta : this.vertices.get(verticeRecebido.getID()).getArestas()) {
+            vizinhos.add(this.vertices.get(aresta.getDestino()));
+        }
+
+        return new List[]{Collections.singletonList(grau), vizinhos};
+
+    }
+
 
 
 }
